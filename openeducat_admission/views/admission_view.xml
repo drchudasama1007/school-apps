@@ -81,7 +81,7 @@
                                     <field name="application_number"/>
                                     <field name="application_date"/>
                                     <field name="admission_date"/>
-                                    <field name="course_id"/>
+                                    <field name="course_id" string="Course (Class for admission)"/>
                                     <field name="batch_id"
                                            context="{'course_id': course_id,'get_parent_batch':1}"/>
                                     <field name="discount"/>
@@ -106,27 +106,50 @@
                             </page>
                             <page name="personal_detail" string="Personal Detail">
                                 <group col="4" colspan="4">
-                                    <field name="gender"/>
                                     <field name="birth_date"/>
-                                    <field name="email" placeholder="Email"/>
+                                    <field name="age"/>
+                                    <field name="gender"/>
+<!--                                    <field name="email" placeholder="Email"/>-->
                                 </group>
-                                <label for="street" string="Address"/>
-                                <div>
-                                    <field name="street" placeholder="Street..."/>
-                                    <field name="street2"/>
-                                    <div class="address_format">
-                                        <field name="city" placeholder="City" style="width: 40%%"/>
-                                        <field name="state_id" options='{"no_open": True}'
-                                               placeholder="State" style="width: 24%%"/>
-                                        <field name="zip" placeholder="ZIP" style="width: 34%%"/>
-                                    </div>
-                                    <field name="country_id" placeholder="Country" options='{"no_open": True}'/>
-                                    <field name="phone" placeholder="Phone"/>
-                                    <field name="mobile" placeholder="Mobile"/>
-                                </div>
+                                <group string="Parents/Guardian Detail">
+                                    <group>
+                                    <field name="parent_name"/>
+                                    <field name="parent_qualification"/>
+                                    <field name="parent_occupation"/>
+                                    <field name="mother_name"/>
+                                    <field name="mother_qualification"/>
+                                    <field name="mother_occupation"/>
+                                    </group>
+<!--                                <label for="street" string="Address"/>-->
+<!--                                <div>-->
+<!--                                    <field name="street" placeholder="Street..."/>-->
+<!--                                    <field name="street2"/>-->
+<!--                                    <div class="address_format">-->
+<!--                                        <field name="city" placeholder="City" style="width: 40%"/>-->
+<!--                                        <field name="state_id" options='{"no_open": True}'-->
+<!--                                               placeholder="State" style="width: 24%"/>-->
+<!--                                        <field name="zip" placeholder="ZIP" style="width: 34%"/>-->
+<!--                                    </div>-->
+<!--                                    <field name="country_id" placeholder="Country" options='{"no_open": True}'/>-->
+<!--                                    <field name="phone" placeholder="Phone"/>-->
+<!--                                    <field name="mobile" placeholder="Mobile"/>-->
+<!--                                </div>-->
+                                     <group>
+                                             <field name="street"/>
+                                             <field name="street2"/>
+                                             <field name="city"/>
+                                             <field name="state_id"/>
+                                             <field name="zip"/>
+                                             <field name="country_id"/>
+                                             <field name="phone" placeholder="Phone"/>
+                                            <field name="mobile" placeholder="Mobile"/>
+                                            <field name="email" placeholder="Email"/>
+                                     </group>
+
+                                </group>
                                 <group col="4" colspan="4">
-                                    <field name="family_business"/>
-                                    <field name="family_income"/>
+<!--                                    <field name="family_business"/>-->
+<!--                                    <field name="family_income"/>-->
                                     <field name="nbr" invisible="1"/>
                                 </group>
                             </page>

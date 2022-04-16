@@ -58,7 +58,8 @@ class OpAdmission(models.Model):
         states={'done': [('readonly', True)]},
         default=lambda self: fields.Datetime.now())
     birth_date = fields.Date(
-        'Birth Date', required=True, states={'done': [('readonly', True)]})
+        'Date of Birth', required=True, states={'done': [('readonly', True)]})
+    age = fields.Char('Age')
     course_id = fields.Many2one(
         'op.course', 'Course', required=True,
         states={'done': [('readonly', True)]})
@@ -78,7 +79,7 @@ class OpAdmission(models.Model):
         'Mobile', size=16,
         states={'done': [('readonly', True)], 'submit': [('required', True)]})
     email = fields.Char(
-        'Email', size=256, required=True,
+        'Email', size=256, required=False,
         states={'done': [('readonly', True)]})
     city = fields.Char('City', size=64, states={'done': [('readonly', True)]})
     zip = fields.Char('Zip', size=8, states={'done': [('readonly', True)]})
@@ -126,11 +127,31 @@ class OpAdmission(models.Model):
     academic_years_id = fields.Many2one('op.academic.year', 'Academic Year')
     academic_term_id = fields.Many2one('op.academic.term', 'Terms')
 
+    application_class = fields.Char("Class For Application")
+
+    parent_name = fields.Char("Father Name")
+    parent_qualification = fields.Char("Father Qaulification")
+    parent_occupation = fields.Char("Father Occupation")
+
+    mother_name = fields.Char("Mother Name")
+    mother_qualification = fields.Char("Mother Qaulification")
+    mother_occupation = fields.Char("Mother Occupation")
+
     _sql_constraints = [
         ('unique_application_number',
          'unique(application_number)',
          'Application Number must be unique per Application!'),
     ]
+
+    @api.onchange('birth_date')
+    def set_age(self):
+        for rec in self:
+            if rec.birth_date:
+                d1 = rec.birth_date
+                # d1 = datetime.strptime(dt, "%Y-%m-%d").date()
+                d2 = datetime.today()
+                rd = relativedelta(d2, d1)
+                rec.age = str(rd.years) + ' years'
 
     @api.onchange('first_name', 'middle_name', 'last_name')
     def _onchange_name(self):
