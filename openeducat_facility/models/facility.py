@@ -26,10 +26,41 @@ class OpFacility(models.Model):
     _name = "op.facility"
     _description = "Manage Facility"
 
-    name = fields.Char('Name', size=16, required=True)
-    code = fields.Char('Code', size=16, required=True)
+    name = fields.Char('Name', required=True)
+    code = fields.Char('Code', required=True)
     active = fields.Boolean(default=True)
+    user_id = fields.Many2one('res.users', string='Resposible')
+    task_ids = fields.One2many('op.facility.task', 'facility_id', string='Facility Task', copy=True)
 
     _sql_constraints = [
         ('unique_facility_code',
          'unique(code)', 'Code should be unique per facility!')]
+
+
+class OpFacilityTask(models.Model):
+    _name = "op.facility.task"
+    _description = "Manage Facility Task"
+
+    name = fields.Char(string='Name')
+    description = fields.Text(string='Description')
+    user_id = fields.Many2one('res.users', string='Resposible')
+    facility_id = fields.Many2one('op.facility', string='Facility')
+    type = fields.Selection([('hourly', 'Hourly'),('daily', 'Daily'),('weekly', 'Weekly'),('monthly', 'Monthly'),('quarterly', 'Quarterly'),
+        ('semi-annually', 'Semi-annually'),
+        ('annually', 'Annually'),],string='Task Type',default='hourly')
+    start_date = fields.Datetime(string='Start Task')
+    excepted_date = fields.Datetime(string='Excepted End Task')
+    end_date = fields.Datetime(string='Actual End Task')
+    state = fields.Selection([('draft', 'Draft'), ('open', 'Open'),('close','Close')],string='Status',default='draft')
+
+    def action_open_task(self):
+        self.write({
+            'state':'open'
+        })
+        return True
+
+    def action_close_task(self):
+        self.write({
+            'state':'close'
+        })
+        return True

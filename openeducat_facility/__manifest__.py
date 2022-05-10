@@ -33,6 +33,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/facility_view.xml',
+        'views/facility_task_view.xml',
         'views/facility_line_view.xml',
         'menus/op_menu.xml',
     ],

@@ -7,5 +7,12 @@
                   sequence="20"
                   action="act_open_op_facility_view"
                   groups="openeducat_core.group_op_back_office,openeducat_core.group_op_back_office_admin"/>
+
+        <menuitem id="menu_op_facility_task_sub"
+                  name="Facilitie Tasks"
+                  parent="openeducat_core.menu_op_school_config_general"
+                  sequence="21"
+                  action="act_open_op_facility_task_view"
+                  groups="openeducat_core.group_op_back_office,openeducat_core.group_op_back_office_admin"/>
     </data>
 </odoo>
