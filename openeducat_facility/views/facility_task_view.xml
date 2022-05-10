@@ -75,9 +75,9 @@
                     <filter string="Annually" name="annually" domain="[('type', '=', 'annually')]"/>
                     <newline/>
                     <group expand="0" string="Group By...">
-                        <filter string="Name" domain="[]" name="group_by_type"
+                        <filter string="Task Type" domain="[]" name="group_by_type"
                                 context="{'group_by':'type'}"/>
-                        <filter string="Task Type" domain="[]" name="group_by_user_id"
+                        <filter string="Resposible" domain="[]" name="group_by_user_id"
                                 context="{'group_by':'user_id'}"/>
                         <filter string="Status" domain="[]" name="group_by_state"
                                 context="{'group_by':'state'}"/>
