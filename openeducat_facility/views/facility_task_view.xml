@@ -67,6 +67,21 @@
                     <field name="name"/>
                     <field name="type"/>
                     <field name="user_id"/>
+                    <filter string="Hourly" name="hourly" domain="[('type', '=', 'hourly')]"/>
+                    <filter string="Daily" name="daily" domain="[('type', '=', 'daily')]"/>
+                    <filter string="Weekly" name="weekly" domain="[('type', '=', 'weekly')]"/>
+                    <filter string="Monthly" name="monthly" domain="[('type', '=', 'monthly')]"/>
+                    <filter string="Semi-annually" name="semiannually" domain="[('type', '=', 'semi-annually')]"/>
+                    <filter string="Annually" name="annually" domain="[('type', '=', 'annually')]"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Name" domain="[]" name="group_by_type"
+                                context="{'group_by':'type'}"/>
+                        <filter string="Task Type" domain="[]" name="group_by_user_id"
+                                context="{'group_by':'user_id'}"/>
+                        <filter string="Status" domain="[]" name="group_by_state"
+                                context="{'group_by':'state'}"/>
+                    </group>
                 </search>
             </field>
         </record>
@@ -81,6 +96,6 @@
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
-        
+
     </data>
 </odoo>
