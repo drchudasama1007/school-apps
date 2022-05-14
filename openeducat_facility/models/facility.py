@@ -52,6 +52,7 @@ class OpFacilityTask(models.Model):
     excepted_date = fields.Datetime(string='Excepted End Task')
     end_date = fields.Datetime(string='Actual End Task')
     state = fields.Selection([('draft', 'Draft'), ('open', 'Open'),('close','Close')],string='Status',default='draft')
+    attachment_ids = fields.Many2many('ir.attachment', string='Attachments')
 
     def action_open_task(self):
         self.write({

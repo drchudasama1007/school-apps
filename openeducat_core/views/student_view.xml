@@ -170,6 +170,11 @@
                                     </field>
                                 </group>
                             </page>
+                            <page name="documents" string="Documents">
+                                <group>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                </group>
+                            </page>
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">

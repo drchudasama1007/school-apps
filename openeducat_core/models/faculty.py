@@ -69,6 +69,7 @@ class OpFaculty(models.Model):
         default=lambda self:
         self.env.user.department_ids and self.env.user.department_ids.ids or False)
     active = fields.Boolean(default=True)
+    attachment_ids = fields.Many2many('ir.attachment', string='Attachments')
 
     @api.constrains('birth_date')
     def _check_birthdate(self):

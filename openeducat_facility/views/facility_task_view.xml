@@ -53,6 +53,13 @@
                         <group>
                             <field name="description"/>
                         </group>
+                         <notebook colspan="4">
+                             <page name="documents" string="Documents">
+                                <group>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
