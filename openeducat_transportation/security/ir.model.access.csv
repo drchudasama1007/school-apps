@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_op_route,access_op_route,model_op_route,,1,1,1,1
+access_op_stop,access_op_stop,model_op_stop,,1,1,1,1

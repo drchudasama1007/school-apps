@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_facility_task_tree" model="ir.ui.view">
+            <field name="name">op.facility.task.tree</field>
+            <field name="model">op.facility.task</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Facility Task">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="type"/>
+                    <field name="start_date"/>
+                    <field name="excepted_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_op_facility_task_form" model="ir.ui.view">
+            <field name="name">op.facility.task.form</field>
+            <field name="model">op.facility.task</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Facility Task">
+                    <header>
+                        <button string="Start Task" name="action_open_task" type="object"
+                                class="oe_highlight" states="draft"/>
+                        <button string="Close Task" name="action_close_task" type="object"
+                                class="oe_highlight" states="open"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,close"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Facilitie Task's Name" required="True"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="facility_id" required="True"/>
+                                <field name="type"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="excepted_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                         <notebook colspan="4">
+                             <page name="documents" string="Documents">
+                                <group>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_op_facility_task_search" model="ir.ui.view">
+            <field name="name">op.facility.task.search</field>
+            <field name="model">op.facility.task</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Facility">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="user_id"/>
+                    <filter string="Hourly" name="hourly" domain="[('type', '=', 'hourly')]"/>
+                    <filter string="Daily" name="daily" domain="[('type', '=', 'daily')]"/>
+                    <filter string="Weekly" name="weekly" domain="[('type', '=', 'weekly')]"/>
+                    <filter string="Monthly" name="monthly" domain="[('type', '=', 'monthly')]"/>
+                    <filter string="Semi-annually" name="semiannually" domain="[('type', '=', 'semi-annually')]"/>
+                    <filter string="Annually" name="annually" domain="[('type', '=', 'annually')]"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Task Type" domain="[]" name="group_by_type"
+                                context="{'group_by':'type'}"/>
+                        <filter string="Resposible" domain="[]" name="group_by_user_id"
+                                context="{'group_by':'user_id'}"/>
+                        <filter string="Status" domain="[]" name="group_by_state"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_facility_task_view">
+            <field name="name">Facilitie Tasks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.facility.task</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_op_facility_task_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</odoo>
