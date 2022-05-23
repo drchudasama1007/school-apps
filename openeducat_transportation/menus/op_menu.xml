@@ -21,5 +21,12 @@
                   action="act_open_op_stop_view"
                   groups="openeducat_core.group_op_faculty"/>
 
+        <menuitem id="menu_op_transportation_attendance"
+                  name="Attendance"
+                  parent="openeducat_transportation.menu_op_transportation_root"
+                  sequence="30"
+                  action="act_open_op_student_attendance_view"
+                  groups="openeducat_core.group_op_faculty"/>
+
     </data>
 </odoo>
