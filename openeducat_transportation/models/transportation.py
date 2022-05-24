@@ -59,9 +59,14 @@ class OpStudentAttendance(models.Model):
             if self.route_id.stop_ids:
                 for stop in self.route_id.stop_ids:
                     if stop.student_ids:
+                        student_data.append((0, 0, {
+                            'display_type': 'line_section',
+                            'name': stop.name,
+                        }))
                         for student in stop.student_ids:
                             student_data.append((0,0,{
                                 'stop_id':stop.id,
+                                'name':stop.name,
                                 'student_id':student.id,
                             }))
             for attendance_line in self.attendance_line_ids:
@@ -79,6 +84,12 @@ class OpStudentAttendanceLine(models.Model):
     student_id = fields.Many2one('op.student', string='Student', copy=True)
     is_arrived = fields.Boolean(string='Is Arrive', copy=True)
     is_departure = fields.Boolean(string='Is Departure', copy=True)
+    display_type = fields.Selection([
+        ('line_section', 'Section'),
+        ('line_note', 'Note'),
+    ], default=False, help="Technical field for UX purpose.")
+    name = fields.Char(string='Stop', tracking=True)
+    sequence = fields.Integer(default=10)
 
 
 class OpStop(models.Model):
