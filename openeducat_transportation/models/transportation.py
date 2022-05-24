@@ -35,11 +35,40 @@ class OpStudent(models.Model):
 
 class OpStudentAttendance(models.Model):
     _name = "op.student.attendance"
+    _rec_name = "complete_name"
 
     attendance_date = fields.Date(string='Date')
     route_id = fields.Many2one('op.route', string='Route')
     active = fields.Boolean(default=True)
     attendance_line_ids = fields.One2many('op.student.attendance.line', 'attendance_id', string='Student attendance', copy=True)
+    complete_name = fields.Char(compute='_name_get_fnc', string="Name")
+
+    @api.depends_context('route_id','attendance_date')
+    def _name_get_fnc(self):
+        for rec in self:
+            if rec.route_id and rec.attendance_date:
+                rec.complete_name = rec.route_id.name + ' - ' + str(rec.attendance_date)
+            else:
+                rec.complete_name = False
+
+
+    @api.onchange('route_id')
+    def onchange_route_id(self):
+        if self.route_id:
+            student_data = []
+            if self.route_id.stop_ids:
+                for stop in self.route_id.stop_ids:
+                    if stop.student_ids:
+                        for student in stop.student_ids:
+                            student_data.append((0,0,{
+                                'stop_id':stop.id,
+                                'student_id':student.id,
+                            }))
+            for attendance_line in self.attendance_line_ids:
+                if attendance_line:
+                    attendance_line.unlink()
+            if student_data:
+                self.attendance_line_ids = student_data
 
 
 class OpStudentAttendanceLine(models.Model):
