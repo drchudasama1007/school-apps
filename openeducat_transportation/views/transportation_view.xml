@@ -236,6 +236,18 @@
             </field>
         </record>
 
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Attendance Action -->
         <record model="ir.actions.act_window" id="act_open_op_student_attendance_view">
             <field name="name">Attendance</field>

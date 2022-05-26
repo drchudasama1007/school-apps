@@ -47,14 +47,14 @@
               sequence="10"/>
 
     <menuitem id="menu_op_course_sub"
-              name="Courses"
+              name="Class"
               parent="menu_op_school_config_course"
               sequence="10"
               action="act_open_op_course_view"
               groups="group_op_back_office,group_op_back_office_admin"/>
 
     <menuitem id="menu_op_batch_sub"
-              name="Batches"
+              name="Sections"
               parent="menu_op_school_config_course"
               sequence="20"
               action="act_open_op_batch_view"
