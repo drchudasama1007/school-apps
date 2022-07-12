@@ -137,6 +137,9 @@ class OpAdmission(models.Model):
     mother_qualification = fields.Char("Mother Qaulification")
     mother_occupation = fields.Char("Mother Occupation")
 
+    nationality = fields.Char("Nationality")
+    religion = fields.Char("Religion")
+
     _sql_constraints = [
         ('unique_application_number',
          'unique(application_number)',
