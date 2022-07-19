@@ -41,6 +41,7 @@ class OpStudentAttendance(models.Model):
     route_id = fields.Many2one('op.route', string='Route')
     active = fields.Boolean(default=True)
     attendance_line_ids = fields.One2many('op.student.attendance.line', 'attendance_id', string='Student attendance', copy=True)
+    stop_line_ids = fields.One2many('op.stop.line', 'attendance_id', string='Stop Times', copy=True)
     complete_name = fields.Char(compute='_name_get_fnc', string="Name")
 
     @api.depends_context('route_id','attendance_date')
@@ -56,9 +57,13 @@ class OpStudentAttendance(models.Model):
     def onchange_route_id(self):
         if self.route_id:
             student_data = []
+            stop_data = []
             if self.route_id.stop_ids:
                 for stop in self.route_id.stop_ids:
                     if stop.student_ids:
+                        stop_data.append((0, 0, {
+                            'stop_id': stop.id,
+                        }))
                         student_data.append((0, 0, {
                             'display_type': 'line_section',
                             'name': stop.name,
@@ -72,8 +77,13 @@ class OpStudentAttendance(models.Model):
             for attendance_line in self.attendance_line_ids:
                 if attendance_line:
                     attendance_line.unlink()
+            for stop_line in self.stop_line_ids:
+                if stop_line:
+                    stop_line.unlink()
             if student_data:
                 self.attendance_line_ids = student_data
+            if stop_data:
+                self.stop_line_ids = stop_data
 
 
 class OpStudentAttendanceLine(models.Model):
@@ -91,6 +101,16 @@ class OpStudentAttendanceLine(models.Model):
     name = fields.Char(string='Stop', tracking=True)
     sequence = fields.Integer(default=10)
 
+class OpStopLine(models.Model):
+    _name = "op.stop.line"
+    _description = "Manage Stops Times"
+
+    name = fields.Char(string='Name')
+    stop_id = fields.Many2one('op.stop', string='Stop', copy=True)
+    arrive_time = fields.Datetime(string='Arrive Time')
+    departure_time = fields.Datetime(string='Departure Time')
+    attendance_id = fields.Many2one('op.student.attendance', string='Attendance', copy=True)
+    sequence = fields.Integer(default=10)
 
 class OpStop(models.Model):
     _name = "op.stop"

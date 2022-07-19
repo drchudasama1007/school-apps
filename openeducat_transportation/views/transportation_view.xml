@@ -193,6 +193,16 @@
                             </group>
                         </group>
                         <group>
+                            <field name="stop_line_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="stop_id"/>
+                                    <field name="arrive_time"/>
+                                    <field name="departure_time"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
                             <field name="attendance_line_ids" widget="section_and_note_one2many">
                                 <tree editable="bottom">
 
