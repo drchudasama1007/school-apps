@@ -107,8 +107,8 @@ class OpStopLine(models.Model):
 
     name = fields.Char(string='Name')
     stop_id = fields.Many2one('op.stop', string='Stop', copy=True)
-    arrive_time = fields.Datetime(string='Arrive Time')
-    departure_time = fields.Datetime(string='Departure Time')
+    arrive_time = fields.Float(string='Arrive Time')
+    departure_time = fields.Float(string='Departure Time')
     attendance_id = fields.Many2one('op.student.attendance', string='Attendance', copy=True)
     sequence = fields.Integer(default=10)
 

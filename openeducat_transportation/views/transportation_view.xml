@@ -197,8 +197,8 @@
                                 <tree editable="bottom">
                                     <field name="sequence" widget="handle"/>
                                     <field name="stop_id"/>
-                                    <field name="arrive_time"/>
-                                    <field name="departure_time"/>
+                                    <field name="arrive_time" widget="float_time"/>
+                                    <field name="departure_time" widget="float_time"/>
                                 </tree>
                             </field>
                         </group>
