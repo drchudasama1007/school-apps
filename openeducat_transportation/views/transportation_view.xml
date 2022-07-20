@@ -218,7 +218,7 @@
                                     <field name="student_id"/>
                                     <field name="name" widget="section_and_note_text"/>
                                     <field name="is_arrived"/>
-                                    <field name="is_departure"/>
+                                    <field name="is_departure" invisible="1"/>
                                 </tree>
                             </field>
                         </group>

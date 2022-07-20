@@ -101,6 +101,7 @@ class OpStudentAttendanceLine(models.Model):
     name = fields.Char(string='Stop', tracking=True)
     sequence = fields.Integer(default=10)
 
+
 class OpStopLine(models.Model):
     _name = "op.stop.line"
     _description = "Manage Stops Times"
@@ -111,6 +112,7 @@ class OpStopLine(models.Model):
     departure_time = fields.Float(string='Departure Time')
     attendance_id = fields.Many2one('op.student.attendance', string='Attendance', copy=True)
     sequence = fields.Integer(default=10)
+
 
 class OpStop(models.Model):
     _name = "op.stop"
